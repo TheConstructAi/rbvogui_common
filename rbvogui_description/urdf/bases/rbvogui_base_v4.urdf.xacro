@@ -62,7 +62,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://rbvogui_description/meshes/bases/rbvogui_logos_v4.dae" scale="1.001 1.07 1.001"/>
+          <mesh filename="package://rbvogui_description/meshes/bases/rbvogui_logos_v4.dae"/>
         </geometry>
       </visual>
     </link>
