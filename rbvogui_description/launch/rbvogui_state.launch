@@ -17,14 +17,19 @@
   <arg name="load_kinematics_file" default="false"/>
   <arg name="gpu" default="false"/>
 
+    <arg name="gps_latitude" default="35.652832"/>
+    <arg name="gps_longitude" default="139.839478"/>
+
+
+
   <group unless="$(arg robot_use_custom_xacro_path)" >
     <param name="robot_description" command="$(find xacro)/xacro --inorder '$(arg robot_xacro_path)$(arg robot_xacro)' 
-                prefix:=$(arg prefix) launch_arm:=$(arg launch_arm) load_kinematics_file:=$(arg load_kinematics_file) gpu:=$(arg gpu)"/>
+                prefix:=$(arg prefix) launch_arm:=$(arg launch_arm) load_kinematics_file:=$(arg load_kinematics_file) gpu:=$(arg gpu) gps_latitude:=$(arg gps_latitude) gps_longitude:=$(arg gps_longitude)"/>
   </group>
 
   <group if="$(arg robot_use_custom_xacro_path)" >
     <param name="robot_description" command="$(find xacro)/xacro --inorder '$(arg robot_custom_xacro_path)$(arg robot_xacro)' 
-                prefix:=$(arg prefix) launch_arm:=$(arg launch_arm) load_kinematics_file:=$(arg load_kinematics_file) gpu:=$(arg gpu)"/>
+                prefix:=$(arg prefix) launch_arm:=$(arg launch_arm) load_kinematics_file:=$(arg load_kinematics_file) gpu:=$(arg gpu) gps_latitude:=$(arg gps_latitude) gps_longitude:=$(arg gps_longitude)"/>
   </group>
 
   <!-- publish tfs through the robot_state_publisher -->
