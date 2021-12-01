@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <launch>
+  <!-- Variable to tell control to publish or not a TF for the odometry frame-->
+  <arg name="odom_tf_publish" default="true"/> 
 
   <arg name="robot_id" default="$(optenv ROBOT_ID robot)"/>
   <arg name="prefix" default="$(arg robot_id)_"/>
@@ -32,7 +34,13 @@
 
   <!-- Simulation - Load joint controller configurations from YAML file to parameter server -->
   <group if="$(arg sim)">
-    <rosparam file="$(find rbvogui_control)/config/robot_$(arg kinematics)_control_sim.yaml" command="load" subst_value="true"/>
+
+    <group if="$(arg odom_tf_publish)">
+        <rosparam file="$(find rbvogui_control)/config/robot_$(arg kinematics)_control_sim.yaml" command="load" subst_value="true"/>
+    </group>
+    <group unless="$(arg odom_tf_publish)">
+        <rosparam file="$(find rbvogui_control)/config/robot_$(arg kinematics)_control_sim_no_odom_tf.yaml" command="load" subst_value="true"/>
+    </group>
     
     <!-- Controller spawner for ackermann/omni model -->
     <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
