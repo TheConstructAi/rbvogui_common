@@ -94,9 +94,9 @@
             <origin xyz="-0.04625 0.0 1.115" rpy="0 0 0"/>
         </xacro:sensor_gps-->
         <!-- Solid-State laser -->
-        <xacro:sensor_benewake_ce30c prefix="${prefix}front_ss_laser" parent="${prefix}base_link" gpu="false">
+        <!-- <xacro:sensor_benewake_ce30c prefix="${prefix}front_ss_laser" parent="${prefix}base_link" gpu="false">
             <origin xyz="0.5657 0.0 0.1622" rpy="0 0 0"/>
-        </xacro:sensor_benewake_ce30c>
+        </xacro:sensor_benewake_ce30c> -->
         <!-- 2d laser -->
         <xacro:sensor_sick_tim551 prefix="${prefix}front_laser" parent="${prefix}base_link"  min_angle="${-PI/2}" max_angle="${PI/2}" prefix_topic="front_laser">
             <origin xyz="0.5307 0.0 0.15389" rpy="${180*deg2rad} 0 0"/>
@@ -106,6 +106,10 @@
         <xacro:sensor_gps prefix="gps" parent="${prefix}base_link" gps_latitude="${gps_latitude}" gps_longitude="${gps_longitude}" update_rate="20" >
             <origin xyz="0.0 0 ${gps_z}" rpy="0 0 0"/>
         </xacro:sensor_gps>
+
+        <xacro:sensor_r430 prefix="$(arg prefix)wrist_rgbd" parent="$(arg prefix)arm_tool0" prefix_topic="wrist_rgbd">
+            <origin xyz="-0.075 0.0 0.065" rpy="0 ${-pi/2} 0"/>
+        </xacro:sensor_r430>
 
         <!-- UR-5 ARM -->
         <xacro:if value="${load_kinematics_file}">
